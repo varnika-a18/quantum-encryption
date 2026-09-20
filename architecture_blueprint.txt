@@ -1,0 +1,32 @@
+MASTER SYSTEM ARCHITECTURE BLUEPRINTS: WEEK 1 
+PROJECT: QUANTUM SECURE CHAT SITE
+DESIGNED BY: VARNIKA(CHIEF ARCHITECT)
+
+ENDPOINT 1: INITIALIZING THE CHAT CHANNEL
+Route Location: /api/quantum/initiate
+
+When Person A clicks "Start Chat" with Person B, the frontend website must send:
+1.Sender name: "Person A"
+2.Receiver name: "Person B"
+3.Hacker status: (True if person C is listening, False if channel is clean)
+
+The physics backend server must run the BB84 simulation script and reply with:
+1.Session end: (A unique tracking number for this specific chat room instance)
+2.Qber rate: (The physics error percentage. Clean =0%, Compromised = 25%)
+3.System action: (Either "ALLOW_DECRYPTION" or "BLOCK_AND_ALARM")
+
+ENDPOINT 2: TRANSMITTING A MESSAGE PACKET 
+Route Location: /api/message/send
+
+When a user types a message and hits the send button, the frontend sends:
+1.Session id: (The active tracking number assigned above)
+2.Sender: "Person A"
+3.Text_Payload:(Any dynamic text message typed by the user)
+
+The database and backend server must divide the output into separate paths:
+1.Bob_screen_output: (If channel is secure, pass the original user text string cleanly)
+2.Eve_screen_output: (If hacked, dynamically generate a randomized, uncrackable text string)
+3.User_warnings: (If compromised, instantly flash a intruder alert to Alice and Bob)
+
+
+
