@@ -1,0 +1,36 @@
+{
+  "api_version": "1.0.0",
+  "project": "quantum-secure-chat",
+  "routes": {
+    "initialize_session": {
+      "endpoint": "/api/quantum/initiate",
+      "method": "POST",
+      "incoming_payload": {
+        "sender_name": "string",
+        "receiver_name": "string",
+        "eve_present": "boolean"
+      },
+      "outgoing_response": {
+        "session_id": "string",
+        "qber_percentage": "float",
+        "compromised_status": "boolean",
+        "system_action": "string"
+      }
+    },
+    "send_message": {
+      "endpoint": "/api/message/send",
+      "method": "POST",
+      "incoming_payload": {
+        "session_id": "string",
+        "sender_name": "string",
+        "raw_text_payload": "string"
+      },
+      "outgoing_response": {
+        "message_id": "integer",
+        "bob_screen_view": "string",
+        "eve_intercept_view": "string",
+        "alarm_triggered": "boolean"
+      }
+    }
+  }
+}
