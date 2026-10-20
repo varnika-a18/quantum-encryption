@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Crypto Terminal Node</title>
+    <style>
+        /* Enterprise Dark Slate Interface Aesthetics */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0d1117;
+            color: #c9d1d9;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+        }
+        .container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+        /* Primary Chat Node Panel Grid Frame */
+        .chat-section {
+            flex: 3;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #30363d;
+            background-color: #161b22;
+        }
+        .chat-header {
+            padding: 15px 20px;
+            background-color: #0d1117;
+            border-bottom: 1px solid #30363d;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        /* Real-time Dynamic Network Intrusion Alarm Banner */
+        .alarm-banner {
+            display: none;
+            background-color: #8b0000;
+            color: #ffffff;
+            padding: 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            animation: blink 2s infinite;
+        }
+        @keyframes blink { 
+            0% { opacity: 1; } 
+            50% { opacity: 0.5; } 
+            100% { opacity: 1; } 
+        }
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .message {
+            max-width: 60%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            line-height: 1.4;
+            font-size: 14px;
+        }
+        .message.sent { 
+            background-color: #238636; 
+            color: #ffffff; 
+            align-self: flex-end; 
+        }
+        .message.received { 
+            background-color: #21262d; 
+            color: #c9d1d9; 
+            align-self: flex-start; 
+            border: 1px solid #30363d; 
+        }
+        .message.corrupted { 
+            background-color: #3b1111; 
+            color: #f85149; 
+            align-self: flex-start; 
+            border: 1px solid #f85149; 
+            font-family: monospace; 
+        }
+        .chat-input-area {
+            padding: 20px;
+            background-color: #0d1117;
+            border-top: 1px solid #30363d;
+            display: flex;
+            gap: 10px;
+        }
+        .chat-input-area input {
+            flex: 1;
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 14px;
+            color: #c9d1d9;
+            font-size: 14px;
+        }
+        .chat-input-area button {
+            background-color: #238636;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 0 28px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        /* Side Quantum Channel Telemetry Section Layout */
+        .telemetry-sidebar {
+            flex: 1;
+            background-color: #0d1117;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .panel-card { 
+            background-color: #161b22; 
+            border: 1px solid #30363d; 
+            border-radius: 8px; 
+            padding: 15px; 
+        }
+        .panel-card h3 { 
+            margin-top: 0; 
+            color: #58a6ff; 
+            border-bottom: 1px solid #30363d; 
+            padding-bottom: 8px; 
+            font-size: 14px; 
+        }
+        .metric-value { 
+            font-size: 28px; 
+            font-weight: bold; 
+            color: #3fb950; 
+            text-align: center; 
+            margin: 10px 0; 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Main Chat Node Interface Workspace Component -->
+        <section class="chat-section">
+            <div class="chat-header">
+                <h2 id="node-user-title">Secure Terminal Node</h2>
+                <span id="channel-status" style="color: #3fb950; font-weight: bold;">● Encryption Synchronized</span>
+            </div>
+            
+            <!-- Real-time Network Intercept Warning Banner Element Block -->
+            <div id="intrusion-banner" class="alarm-banner">
+                🚨 BREACH ALERT: QUANTUM CHANNEL ANOMALY DETECTED - SIGNAL INTERCEPT RECORDED
+            </div>
+
+            <div id="message-stream-feed" class="chat-messages">
+                <!-- Data message boxes will drop and stack inside here via JavaScript DOM methods -->
+            </div>
+
+            <div class="chat-input-area">
+                <input type="text" id="message-payload-input" placeholder="Enter secure payload data string...">
+                <button id="transmit-packet-btn">Send Message</button>
+            </div>
+        </section>
+
+        <!-- Dynamic Channel Telemetry Feed Sidebar Component Layout -->
+        <aside class="telemetry-sidebar">
+            <h2>Channel Telemetry</h2>
+            
+            <div class="panel-card">
+                <h3>Node Metadata</h3>
+                <div>Active Identity: Connecting...</strong></div>
+                <div style="margin-top: 8px;">Session Tracking: <span id="session-tag" style="font-family: monospace; font-size: 12px;">None</span></div>
+            </div>
+
+            <div class="panel-card">
+                <h3>QKD Physics Metrics</h3>
+                <div>Quantum Bit Error Ratio (QBER):</div>
+                <div id="qber-percentage-node" class="metric-value">0.0%</div>
+                
+                <div style="margin-top: 12px; font-size: 13px;">
+                    <div>Channel Isolation State:</div>
+                    <div id="integrity-status-label" style="color: #3fb950; margin-top: 4px; font-weight: bold;">SECURE PIPELINE</div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        // CORE STRUCTURAL HOOKS FOR INTEGRATING WITH PERSON 2 & 3 SERVER INFRASTRUCTURE
+        const BACKEND_URL = "http://localhost:5000"; // The network endpoint port address used by your server engineers
+        let activeSessionId = "MOCK-SESSION-12345";
+        let currentUserIdentity = "Alice"; // This identity value adjusts dynamically depending on user credential logins
+
+        // Configure interface node layout tracking labels immediately on load
+        document.getElementById('identity-tag').innerText = currentUserIdentity;
+        document.getElementById('node-user-title').innerText = `Terminal Node: ${currentUserIdentity}`;
+
+        // Dynamic Network Visual View State Intercept Modifier
+        function injectNetworkTelemetryState(qber, isCompromised) {
+            const qberDisplay = document.getElementById('qber-percentage-node');
+            const integrityStatus = document.getElementById('integrity-status-label');
+            const intrusionBanner = document.getElementById('intrusion-banner');
+            const channelStatus = document.getElementById('channel-status');
+
+            qberDisplay.innerText = `${qber.toFixed(1)}%`;
+            
+            if (isCompromised) {
+                qberDisplay.style.color = "#da3633";
+                integrityStatus.innerText = "COMPROMISED / ADVERSARY DETECTED";
+                integrityStatus.style.color = "#da3633";
+                channelStatus.innerText = "● Connection Unsafe";
+                channelStatus.style.color = "#da3633";
+                intrusionBanner.style.display = "block";
+            } else {
+                qberDisplay.style.color = "#3fb950";
+                integrityStatus.innerText = "SECURE PIPELINE";
+                integrityStatus.style.color = "#3fb950";
+                channelStatus.innerText = "● Encryption Synchronized";
+                channelStatus.style.color = "#3fb950";
+                intrusionBanner.style.display = "none";
+            }
+        }
+
+        // Action Trigger: Ship clear data packet payload directly to Person 3's live endpoint database routing
+        document.getElementById('transmit-packet-btn').addEventListener('click', async function() {
+            const inputField = document.getElementById('message-payload-input');
+            const textPayload = inputField.value.trim();
+            
+            if (textPayload !== "") {
+                // Render your message locally on your own feed framework immediately
+                function renderMessageBubble(sender, text, styleClass) {
+            const messageBox = document.getElementById('message-stream-feed');
+            if(!messageBox) return;
+            
+            const msgNode = document.createElement('div');
+            // Fixed backtick character quotes to preserve the CSS layout classes
+            msgNode.className = `message ${styleClass}`;
+            msgNode.innerHTML = `<strong>${sender}:</strong> ${text}`;
+            
+            messageBox.appendChild(msgNode);
+            messageBox.scrollTop = messageBox.scrollHeight;
+        }
+
+                // REAL NETWORK WIRING: Asynchronously pipes text data arrays directly into server pipelines
+                try {
+                    const response = await fetch(`${BACKEND_URL}/api/message/send`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            session_id: activeSessionId,
+                            sender_name: currentUserIdentity,
+                            raw_text_payload: textPayload
+                        })
+                    });
+                    const data = await response.json();
+                    // Process internal network frame feedback confirmations here if required
+                } catch (error) {
+                    console.error("Central backend server offline. Maintaining network isolation safety simulation.");
+                }
+            }
+        });
+
+        // HTML Dynamic Document Tree View Appender Helper Function

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Secure Chat Room</title>
+    <style>
+        /* Modern Dark Slate Engineering Aesthetics */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0d1117;
+            color: #c9d1d9;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+        }
+        .container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+        /* Left Column: Real-time Live Chat Portal */
+        .chat-section {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #30363d;
+            background-color: #161b22;
+        }
+        .chat-header {
+            padding: 20px;
+            background-color: #0d1117;
+            border-bottom: 1px solid #30363d;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        /* Dynamic Flash Warning Banner Node */
+        .alarm-banner {
+            display: none;
+            background-color: #8b0000;
+            color: #ffffff;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            animation: blink 1.5s infinite;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .message {
+            max-width: 60%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            line-height: 1.4;
+        }
+        .message.sent {
+            background-color: #238636;
+            color: #ffffff;
+            align-self: flex-end;
+        }
+        .message.received {
+            background-color: #21262d;
+            color: #c9d1d9;
+            align-self: flex-start;
+            border: 1px solid #30363d;
+        }
+        .chat-input-area {
+            padding: 20px;
+            background-color: #0d1117;
+            border-top: 1px solid #30363d;
+            display: flex;
+            gap: 10px;
+        }
+        .chat-input-area input {
+            flex: 1;
+            background-color: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 12px;
+            color: #c9d1d9;
+            font-size: 14px;
+        }
+        .chat-input-area button {
+            background-color: #238636;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 0 24px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        /* Right Column: Quantum Control Telemetry Dashboard */
+        .telemetry-section {
+            flex: 1;
+            background-color: #0d1117;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        .panel-card {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .panel-card h3 {
+            margin-top: 0;
+            color: #58a6ff;
+            border-bottom: 1px solid #30363d;
+            padding-bottom: 10px;
+        }
+        .qber-display {
+            font-size: 36px;
+            font-weight: bold;
+            color: #3fb950;
+            text-align: center;
+            margin: 15px 0;
+        }
+        /* Toggle Styling Elements */
+        .switch-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #21262d; border: 1px solid #30363d; transition: .3s; border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px;
+            background-color: #8b949e; transition: .3s; border-radius: 50%;
+        }
+        input:checked + .slider { background-color: #da3633; }
+        input:checked + .slider:before { transform: translateX(24px); background-color: #ffffff; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Live Chat Engine Column Layout -->
+        <section class="chat-section">
+            <div class="chat-header">
+                <h2>Secure Session Channel</h2>
+                <span id="channel-status" style="color: #3fb950; font-weight: bold;">● Channel Active</span>
+            </div>
+            
+            <!-- Structural Warning Alert Banner Node -->
+            <div id="intrusion-banner" class="alarm-banner">
+                🚨 WARNING: SECURE QUANTUM CHANNEL COMPROMISED - QBER EXCEEDS SAFETY LIMITS
+            </div>
+
+            <div id="message-display-box" class="chat-messages">
+                <!-- Future dynamic data bubbles stack inside here -->
+            </div>
+
+            <div class="chat-input-area">
+                <input type="text" id="user-text-input" placeholder="Type encrypted data packet payload...">
+                <button id="send-packet-btn">Send</button>
+            </div>
+        </section>
+
+        <!-- Quantum Network Telemetry Dashboard Panel Column Layout -->
+        <aside class="telemetry-section">
+            <h2>Quantum Panel Dashboard</h2>
+            
+            <!-- Adversary Simulation Control Card Box Component -->
+            <div class="panel-card">
+                <h3>Adversary Settings</h3>
+                <div class="switch-container">
+                    <span>Simulate Hacker Intrusion (Eve)</span>
+                    <label class="switch">
+                        <input type="checkbox" id="eve-toggle-switch">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Physics Calculation Matrix Feedback Telemetry Card Box Component -->
+            <div class="panel-card">
+                <h3>Quantum Channel Telemetry</h3>
+                <div>Calculated Bit Error Ratio (QBER):</div>
+                <div id="qber-percentage-node" class="qber-display">0.0%</div>
+                
+                <div style="margin-top: 15px;">
+                    <div>Channel Isolation Integrity State:</div>
+                    <div id="integrity-status-label" style="color: #3fb950; margin-top: 5px; font-weight: bold;">SECURE / WORKING STATE</div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        // DOM Element Workspace Node Selection Hooks
+        const eveToggle = document.getElementById('eve-toggle-switch');
+        const qberDisplay = document.getElementById('qber-percentage-node');
+        const integrityStatus = document.getElementById('integrity-status-label');
+        const intrusionBanner = document.getElementById('intrusion-banner');
+        const channelStatus = document.getElementById('channel-status');
+
+        // Dynamic State Transition Engine Function
+        function updateDashboardState(isHacked) {
+            if (isHacked) {
+                // State Condition A: Eavesdropper is Active (Spike Telemetry Matrix)
+                qberDisplay.innerText = "25.4%";
+                qberDisplay.style.color = "#da3633"; // Emergency Crimson Alert Red
+                
+                integrityStatus.innerText = "LINE COMPROMISED / INTRUSION STATE";
+                integrityStatus.style.color = "#da3633";
+                
+                channelStatus.innerText = "● Breach Detected";
+                channelStatus.style.color = "#da3633";
+                
+                // Unveil the blinking emergency warning banner modal element
+                intrusionBanner.style.display = "block";
+            } else {
+                // State Condition B: Clean Quantum Channel (Reset Base Values)
+                qberDisplay.innerText = "0.0%";
+                qberDisplay.style.color = "#3fb950"; // Quantum Secure Green
+                
+                integrityStatus.innerText = "SECURE / WORKING STATE";
+                integrityStatus.style.color = "#3fb950";
+                
+                channelStatus.innerText = "● Channel Active";
+                channelStatus.style.color = "#3fb950";
+                
+                // Fully suppress the visual warning banner node
+                intrusionBanner.style.display = "none";
+            }
+        }
+
+        // Hook Interactive Change Event Listener onto the Adversary Toggle Switch
+        eveToggle.addEventListener('change', function() {
+            // Read the current physical state of the checkbox slider element
+            const isChecked = this.checked;
+            
+            // Execute the interactive interface state transformation loop
+            updateDashboardState(isChecked);
+        });
+
+        // Core Chat Input Box Frame Listener Action
+        document.getElementById('send-packet-btn').addEventListener('click', function() {
+            const inputField = document.getElementById('user-text-input');
+            const messageText = inputField.value.trim();
+            
+            if(messageText !== "") {
+                const messageBox = document.getElementById('message-display-box');
+                const newMsgNode = document.createElement('div');
+                newMsgNode.className = 'message sent';
+                newMsgNode.innerHTML = `<strong>You:</strong> ${messageText}`;
+                messageBox.appendChild(newMsgNode);
+                
+                inputField.value = "";
+                messageBox.scrollTop = messageBox.scrollHeight;
+                
+                // FUTURE WORK: Connect dynamic asynchronous fetch pipelines to Person 3's API routes here.
+            }
+        });
+    </script>
