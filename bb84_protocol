@@ -1,0 +1,67 @@
+import random
+
+def run_bb84_simulation(length=10, eve_active=False):
+    # 1. Player 1 generation
+    player1_bits = [random.randint(0, 1) for _ in range(length)]
+    player1_bases = [random.randint(0, 1) for _ in range(length)] # polarisation bases
+
+    # 2. Eve Interception (Optional based on toggle switch)
+    if eve_active:
+        interceptor_bases = [random.randint(0, 1) for _ in range(length)]
+        interceptor_bits = []
+        for i in range(length):
+            if interceptor_bases[i] == player1_bases[i]:
+                interceptor_bits.append(player1_bits[i])
+            else:
+                interceptor_bits.append(random.randint(0, 1))
+    else:
+        # If Eve is off, photons pass through cleanly to Player 2
+        interceptor_bases = player1_bases
+        interceptor_bits = player1_bits
+
+    # 3. Player 2 independently chooses random bases to measure incoming photons
+    player2_bases = [random.randint(0, 1) for _ in range(length)]
+    player2_bits = []
+    for i in range(length):
+        if player2_bases[i] == interceptor_bases[i]: # checking against the received bases
+            player2_bits.append(interceptor_bits[i])
+        else:
+            player2_bits.append(random.randint(0, 1)) # random guess if bases don't match
+
+    # 4. Sifting - eliminating the mismatched bits 
+    player1_sifted = []
+    player2_sifted = []
+    for i in range(length):
+        if player1_bases[i] == player2_bases[i]: # if bases match, keep the bits
+            player1_sifted.append(player1_bits[i])
+            player2_sifted.append(player2_bits[i])
+
+    # 5. Error Check (Security Validation)
+    errors = 0
+    if len(player1_sifted) > 0:
+        for i in range(len(player1_sifted)):
+            if player1_sifted[i] != player2_sifted[i]:
+                errors += 1
+        error_rate = errors / len(player1_sifted)
+    else:
+        error_rate = 0.0
+
+    # Determine if channel is secure (Threshold set to 25% based on your logic)
+    is_secure = error_rate <= 0.25
+
+    # Return everything as a dictionary so the backend can easily convert it to JSON
+    return {
+        "sifted_key": player1_sifted,
+        "error_rate": round(error_rate * 100, 2),
+        "is_secure": is_secure,
+        "errors_found": errors,
+        "sifted_length": len(player1_sifted)
+    }
+
+# Optional: You can still test it locally by running this file directly!
+if __name__ == "__main__":
+    print("Testing BB84 Simulation Function (Eve OFF):")
+    print(run_bb84_simulation(length=10, eve_active=False))
+    
+    print("\nTesting BB84 Simulation Function (Eve ON):")
+    print(run_bb84_simulation(length=10, eve_active=True))
