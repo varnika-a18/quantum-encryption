@@ -47,7 +47,7 @@ def run_bb84_simulation(length=10, eve_active=False):
         error_rate = 0.0
 
     # Determine if channel is secure (Threshold set to 25% based on your logic)
-    is_secure = error_rate <= 0.25
+    is_secure = error_rate <= 0.11
 
     # Return everything as a dictionary so the backend can easily convert it to JSON
     return {
