@@ -1,0 +1,19 @@
+
+from flask import Flask, request, jsonify
+from bb84_core import run_bb84_simulation
+
+app = Flask(__name__)
+
+@app.route('/api/generate-key', methods=['POST'])
+def generate_key():
+    data = request.json
+    length = data.get('length', 10)
+    eve_active = data.get('eve_active', False)
+    
+    result = run_bb84_simulation(length, eve_active)
+    
+  
+    return jsonify(result)
+
+if __name__ == '__main__':
+    app.run(debug=True)
